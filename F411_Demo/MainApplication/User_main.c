@@ -76,7 +76,6 @@ void Main_Loop(void)
 	} 
 }
 
-int contCnt = 0;
 int WS_OS_Task_Key(void * date)
 {
 	static uint8_t key_value = 0;
@@ -149,6 +148,9 @@ int WS_OS_Task_RTC(void * date)
 	//USB_printf("20%02d,%02d,%02d\r\n",sData.Year,sData.Month,sData.Date);
 	//USB_printf("AM,PM:%d\r\n",sTime.TimeFormat);
 	//USB_printf("%02dh,%02dmin,%02ds,%03dms\r\n",sTime.Hours,sTime.Minutes,sTime.Seconds,(255 + 1 - sTime.SubSeconds) * 1000 / (255 + 1));
+	
+	//USB_printf("Open count : %d\r\n",systemConfigInfo.powerOnCount);
+	
 	return 1000;
 }
 
