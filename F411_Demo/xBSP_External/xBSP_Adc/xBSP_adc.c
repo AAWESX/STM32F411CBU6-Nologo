@@ -1,3 +1,22 @@
+/***************************************************************
+ * 文件名: xBSP_adc.c
+ * 版本号: 1.0
+ * 更新时间: 2024-08-22
+ * 更新人物: Xiang Likang
+ * 邮件地址: 3265103350@qq.com
+ * 
+ * 描述:
+ * 这个文件包含了与ADC（模数转换器）相关的功能实现，包括初始化ADC、启动DMA采样和处理ADC转换完成的回调函数。
+ * 如果使用双缓冲模式（ADC_Double_Control 宏定义），则可以处理双缓冲的数据传输和回调。
+ * 
+ * 更新内容:
+ * 1.0V 2024-08-22
+ *  - 添加了双缓冲模式下的DMA启动和回调处理函数。
+ *  - 实现了ADC转换完成的处理函数，根据不同的ADC实例（ADC1、ADC2、ADC3）处理采样数据。
+ * 待更新
+ * __HAL_DMA_GET_FLAG(hadc->DMA_Handle, DMA_FLAG_TCIF0_4);// 全传输完成中断标志
+ * __HAL_DMA_CLEAR_FLAG(hadc->DMA_Handle, DMA_FLAG_TCIF0_4);// 清除全传输完成中断标志
+ ***************************************************************/
 
 
 #include "xBSP_Adc/xBSP_adc.h"
@@ -72,56 +91,53 @@ void ADC_DMA_Start(ADC_HandleTypeDef *hadc,uint16_t Sampling_Length,uint16_t Sam
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {	
+	
 #if ADC1_Control 
-    // Buffer1 已经传输完成，处理 Buffer1 的数据
-
-	
-//		uint32_t flag_status = __HAL_DMA_GET_FLAG(hadc->DMA_Handle, DMA_FLAG_TCIF0_4);
-//		USB_printf("TCIF0_4 Flag Status: %lu\r\n", flag_status);
-	
-    // 判断当前正在使用的缓冲区指针
     if (hadc->Instance == ADC1) 
-   {
-		 			// 清除全传输完成中断标志
-//			__HAL_DMA_CLEAR_FLAG(hadc->DMA_Handle, DMA_FLAG_TCIF0_4);
-        // 当前缓冲区指针为0，表示 Buffer2 已经传输完成，DMA 切换到 Buffer1
-        //USB_printf("ADC1_SPL_Buffer_A: %d , %d , %d \r\n", ADC1_SPL_Buffer_A[0], ADC1_SPL_Buffer_A[1], ADC1_SPL_Buffer_A[2]);
-    
+		{
         ADC_Samplink_STA_A |= ADC1_SPL_STA_FLAG;
-			
-
 		}
-		
 #endif
+		
+#if ADC2_Control 
+		if (hadc->Instance == ADC2) 
+    {
+        ADC_Samplink_STA_A |= ADC2_SPL_STA_FLAG;
+    }
+#endif
+		
+#if ADC3_Control 
+		if (hadc->Instance == ADC3) 
+    {
+        ADC_Samplink_STA_A |= ADC3_SPL_STA_FLAG;
+    }
+#endif
+		
 }
 
 
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc) 
 {	
+	
 #if ADC1_Control 
-    // Buffer2 已经传输完成，处理 Buffer2 的数据
-    // 检查是否是半传输完成中断
-	
-//	uint32_t flag_status = __HAL_DMA_GET_FLAG(hadc->DMA_Handle, DMA_FLAG_HTIF0_4);
-//	USB_printf("HTIF0_4 Flag Status: %lu\r\n", flag_status);
-
-
-	
 		if (hadc->Instance == ADC1) 
     {
-			// 清除半传输完成中断标志
-//			 __HAL_DMA_CLEAR_FLAG(hadc->DMA_Handle, DMA_FLAG_HTIF0_4);
-        
-       
-        // 当前缓冲区指针不为0，表示 Buffer1 已经传输完成，DMA 切换到 Buffer2
-        //USB_printf("ADC1_SPL_Buffer_B: %d , %d , %d \r\n", ADC1_SPL_Buffer_B[0], ADC1_SPL_Buffer_B[1], ADC1_SPL_Buffer_B[2]);
-        
         ADC_Samplink_STA_B |= ADC1_SPL_STA_FLAG;
-			
-
-			
     }
+#endif
 		
+#if ADC2_Control 
+		if (hadc->Instance == ADC2) 
+    {
+        ADC_Samplink_STA_B |= ADC2_SPL_STA_FLAG;
+		}
+#endif
+		
+#if ADC3_Control 
+		if (hadc->Instance == ADC3) 
+    {
+        ADC_Samplink_STA_B |= ADC3_SPL_STA_FLAG;
+    }
 #endif
 }
 
