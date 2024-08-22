@@ -33,8 +33,6 @@
 /* Íâ²¿¾ä±ú */
 
 
-
-
 int WS_OS_Task_Key(void * date);
 int WS_OS_Task_UART_USB(void * date);
 int WS_OS_Task_RTC(void * date);
@@ -170,7 +168,6 @@ int WS_OS_Task_ADC(void * date)
 		
 		ADC_Samplink_STA_B = 0;
 		USB_printf("ADC1_SPL_Buffer_B: %d , %d , %d \r\n",ADC1_SPL_Buffer_B[0],ADC1_SPL_Buffer_B[1],ADC1_SPL_Buffer_B[2]);
-	
 	}
 	
 	return 10;
