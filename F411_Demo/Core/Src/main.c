@@ -28,7 +28,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "xDRV_OLED/xDRV_oled.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

@@ -44,5 +44,4 @@ f411_demo/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\USB_DEVICE\Target\usbd_conf.h \
   D:\Keil_v5\ARM\ARMCLANG\include\stdio.h \
   D:\Keil_v5\ARM\ARMCLANG\include\stdlib.h \
-  D:\Keil_v5\ARM\ARMCLANG\include\string.h ..\Core\Inc\gpio.h \
-  ..\xDRV_External\xDRV_OLED\xDRV_oled.h
+  D:\Keil_v5\ARM\ARMCLANG\include\string.h ..\Core\Inc\gpio.h

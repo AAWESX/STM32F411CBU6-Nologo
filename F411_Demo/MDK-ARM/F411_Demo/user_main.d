@@ -51,7 +51,8 @@ f411_demo/user_main.o: ..\MainApplication\User_main.c \
   ..\Core\Inc\tim.h ..\Core\Inc\rtc.h ..\Core\Inc\adc.h \
   ..\xDRV_External\xDRV_W25Qxx\xDRV_w25Qxx.h \
   ..\xDRV_External\xDRV_Led\xDRV_led.h \
-  ..\xDRV_External\xDRV_Key\xDRV_key.h ..\WSOS\ws_config.h \
+  ..\xDRV_External\xDRV_Key\xDRV_key.h \
+  ..\xBSP_External\Config_Data\ws_config.h \
   ..\xBSP_External\xBSP_DWT\xBSP_DWT.h \
   ..\xBSP_External\xBSP_Delay\xBSP_delay.h \
   ..\xBSP_External\xBSP_IIC\xBSP_iic.h \

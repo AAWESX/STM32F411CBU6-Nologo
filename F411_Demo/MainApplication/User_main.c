@@ -18,7 +18,7 @@
 
 
 /* 用户软件驱动 */
-#include "ws_config.h"
+#include "Config_Data/ws_config.h"
 // #include "xBSP_Usart/xBSP_usart.h"
 #include "xBSP_DWT/xBSP_DWT.h"
 #include "xBSP_Delay/xBSP_delay.h"
